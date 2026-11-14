@@ -1649,7 +1649,7 @@ html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::a
 <script>
 /* E-mail de confirmation au client, envoyé par le script Google de contact@ycnstudio.com
    après une demande bien reçue par Formspree. Adresse du script : à renseigner après son installation. */
-var YCN_CONFIRMATION='https://script.google.com/macros/s/AKfycbyTEayed6qoy66e2T6V8Aj1TaUYYrYIu5aNvC6X6WBL2-UFKiB4VH0mn0gt4yf5JlI/exec';
+var YCN_CONFIRMATION='https://script.google.com/macros/s/AKfycbxlOOsQ0YOrNZHEadb4LVOLxPzIp-3vCIJQnR7v1vNbN2cbLln6cMjHdAsKWmKRJdoZ/exec';
 function ycnConfirmer(form){
   if(!YCN_CONFIRMATION)return;
   try{fetch(YCN_CONFIRMATION,{method:'POST',mode:'no-cors',body:new URLSearchParams(new FormData(form))});}catch(e){}
