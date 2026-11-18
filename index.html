@@ -131,6 +131,95 @@ section{padding:104px 0;border-bottom:1px solid var(--line)}
 .problem .list p:nth-last-child(2){border-bottom:1px solid var(--line)}
 .problem .list p.turn{margin-top:32px;padding:4px 0 4px 20px;border:0;border-left:6px solid var(--red);font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(26px,3vw,36px);line-height:1.05}
 .problem .turn b{color:var(--red);font-weight:400}
+/* Vidéo de présentation, mise en page comme une planche de plan : fond noir quadrillé dans les deux thèmes, lecture au clic seulement */
+.promo{background-color:#000000;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:48px 48px;background-position:center top;color:#FFFFFF;padding:88px 0;overflow:hidden}
+.promo-t{font-size:clamp(48px,7vw,104px);text-align:center;margin-bottom:48px}
+.promo-t span{display:block}
+.promo-t .r{color:var(--red)}
+.promo-t .caret{display:inline;margin-left:.04em;animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.promo-sheet{position:relative;width:calc(80vh * 9 / 16);max-width:100%;margin:0 auto}
+.promo-cart{display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#A8A8A8;padding-bottom:8px;border-bottom:1px solid #4A4A4A;margin-bottom:18px;white-space:nowrap}
+.promo-frame{position:relative}
+.promo-vid{display:block;width:100%;height:auto;aspect-ratio:9/16;background:#000000}
+.promo-frame .k{position:absolute;width:16px;height:16px;border:0 solid rgba(255,255,255,.55);pointer-events:none}
+.promo-frame .k1{top:-9px;left:-9px;border-top-width:1px;border-left-width:1px}
+.promo-frame .k2{top:-9px;right:-9px;border-top-width:1px;border-right-width:1px}
+.promo-frame .k3{bottom:-9px;left:-9px;border-bottom-width:1px;border-left-width:1px}
+.promo-frame .k4{bottom:-9px;right:-9px;border-bottom-width:1px;border-right-width:1px}
+.promo-play{position:absolute;left:50%;top:50%;z-index:2;width:84px;height:84px;margin:-42px 0 0 -42px;padding:0;border:0;background:transparent;cursor:pointer;display:grid;place-items:center}
+.promo-play::before{content:"";position:absolute;inset:0;background:var(--red);animation:recsq 1.8s ease-in-out infinite}
+.promo-play svg{position:relative;width:30px;height:30px;margin-left:4px}
+.promo-play[hidden]{display:none}
+.promo-cote{position:relative;height:30px;margin-top:20px;border-top:1px solid #5A5A5A;background:repeating-linear-gradient(to right,#5A5A5A 0 1px,transparent 1px 8.333%) top left/100% 6px no-repeat}
+.promo-cote::before,.promo-cote::after{content:"";position:absolute;top:-6px;width:1px;height:12px;background:#A8A8A8}
+.promo-cote::before{left:0}
+.promo-cote::after{right:0}
+.promo-cote .run{position:absolute;left:0;top:-2px;height:3px;width:0;background:var(--red)}
+.promo-cote .t{position:absolute;top:10px;font-size:11px;font-weight:500;letter-spacing:.16em;color:#A8A8A8}
+.promo-cote .t0{left:0}
+.promo-cote .t1{right:0}
+.promo-notes{list-style:none;margin:0;padding:0}
+.promo-notes li{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:#D0D0D0}
+.promo-notes b{color:var(--red);font-weight:600}
+.promo-cta{text-align:center;margin-top:36px}
+.promo-notes .nm{display:none}
+/* Ordinateur : annotations de part et d'autre, reliées à la vidéo par une ligne de cote */
+@media (min-width:1101px){
+  .promo-notes li{position:absolute;display:flex;align-items:center;gap:14px;width:min(380px,calc((min(100vw,1240px) - 64px - (80vh - 18px) * 9 / 16) / 2 - 12px))}
+  .promo-notes li::after{content:"";flex:1 0 72px;height:9px;border-top:0;background:linear-gradient(#6A6A6A,#6A6A6A) left center/100% 1px no-repeat,linear-gradient(#A8A8A8,#A8A8A8) right center/1px 100% no-repeat}
+  .promo-notes .n1,.promo-notes .n3{right:calc(100% + 14px);text-align:right}
+  .promo-notes .n2{left:calc(100% + 14px);flex-direction:row-reverse}
+  .promo-notes .n2::after{background-position:left center,left center}
+  .promo-notes .n1{top:24%}
+  .promo-notes .n2{top:44%}
+  .promo-notes .n3{top:66%}
+}
+@media (max-width:1100px){
+  .promo-notes{width:calc(80vh * 9 / 16);max-width:100%;margin:28px auto 0}
+  .promo-notes li{padding:10px 0;border-top:1px solid #333333}
+  .promo-notes li:last-child{border-bottom:1px solid #333333}
+}
+@media (max-width:900px){
+  .promo{padding:56px 0}
+  .promo-t{margin-bottom:32px}
+  .promo-sheet,.promo-notes{width:auto}
+  .promo-frame{margin:0 -20px}
+  .promo-frame .k{border-color:#8C8C8C}
+  .promo-frame .k1{top:10px;left:10px}
+  .promo-frame .k2{top:10px;right:10px}
+  .promo-frame .k3{bottom:10px;left:10px}
+  .promo-frame .k4{bottom:10px;right:10px}
+  .promo-play{width:72px;height:72px;margin:-36px 0 0 -36px}
+  .promo-cta{margin-top:24px}
+  /* Mobile : annotations en légende de plan, 3 colonnes égales séparées par un trait fin */
+  .promo-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:none;margin:24px -20px 0;border-top:1px solid #4A4A4A;border-bottom:1px solid #4A4A4A}
+  .promo-notes li,.promo-notes li:last-child{padding:12px 8px 13px;border:0;border-left:1px solid #4A4A4A;text-align:center;font-size:12px;letter-spacing:.02em;line-height:1.35;color:#FFFFFF}
+  .promo-notes li:first-child{border-left:0}
+  .promo-notes b{display:block;margin-bottom:6px;letter-spacing:.16em}
+  .promo-notes .nd{display:none}
+  .promo-notes .nm{display:block}
+}
+/* À partir de 600 px (tablette et ordinateur) : le bloc vidéo ne dépasse jamais 80 % de la hauteur de l'écran, reste en 9:16 et centré */
+@media (min-width:600px){
+  /* 18 px = les repères d'angle qui dépassent de 9 px en haut et en bas */
+  .promo-sheet{width:min(100%, calc((80vh - 18px) * 9 / 16));max-width:100%;margin:0 auto}
+  .promo-frame{width:100%;max-height:calc(80vh - 18px);aspect-ratio:9/16;margin:0}
+  .promo-vid{width:100%;height:100%;max-height:calc(80vh - 18px);object-fit:contain}
+}
+/* Tablette (600 à 900 px) : repères d'angle à l'extérieur comme sur ordinateur ; légende à la largeur de la vidéo */
+@media (min-width:600px) and (max-width:900px){
+  .promo-frame .k{border-color:rgba(255,255,255,.55)}
+  .promo-frame .k1{top:-9px;left:-9px}
+  .promo-frame .k2{top:-9px;right:-9px}
+  .promo-frame .k3{bottom:-9px;left:-9px}
+  .promo-frame .k4{bottom:-9px;right:-9px}
+  .promo-notes{margin:24px 0 0}
+}
+/* Pas de curseur-drone dans cette section : curseur normal pour le lecteur */
+body.cursor-on .promo,body.cursor-on .promo a,body.cursor-on .promo video{cursor:auto}
+body.cursor-on .promo a,body.cursor-on .promo button{cursor:pointer}
+body.calm .promo-t .caret,body.calm .promo-play::before{animation:none}
 /* Flèches du carrousel (affichées sur mobile) */
 .sarrow{display:none;position:absolute;top:50%;z-index:2;width:40px;height:40px;margin-top:-20px;padding:0;background:var(--bg);border:1px solid var(--ink);cursor:pointer}
 .sarrow.prev{left:0}
@@ -487,7 +576,7 @@ body.calm .rec,body.calm .rec-halo{animation:none}
   .qdrone svg,.qdrone .rotor,.quote.js .qpanel.on,.xdrone svg,.xdrone .rotor,.xpanel{animation:none}
   .xcard::before,.xmore::after{transition:none}
   .hero h1.float span{animation:none}
-  .rec,.rec-halo,.logo-sq{animation:none}
+  .rec,.rec-halo,.logo-sq,.promo-t .caret,.promo-play::before{animation:none}
   .qdrone,.qflight .rail-done{transition:none}
 }
 /* Interrupteur jour / nuit : carré rouge qui glisse */
@@ -645,6 +734,29 @@ html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::a
     </div>
   </div>
 </div>
+
+<section class="promo" id="video" aria-labelledby="t-video">
+  <div class="wrap">
+    <h2 id="t-video" class="promo-t"><span>Le chantier</span> <span class="r">en une minute.<span class="caret" aria-hidden="true">|</span></span></h2>
+    <div class="promo-sheet">
+      <div class="promo-cart" aria-hidden="true"><span>YCN Chantier — Planche 04</span><span>Film · 0:47</span></div>
+      <div class="promo-frame">
+        <video class="promo-vid" id="promoVid" controls playsinline preload="none" width="720" height="1280" poster="assets/video/ycn-promo-poster.jpg" aria-label="Vidéo de présentation de YCN Chantier, 47 secondes">
+          <source src="assets/video/ycn-promo-9x16.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="promo-play" id="promoPlay" aria-label="Lire la vidéo"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M5 2 L27 15 L5 28 Z" fill="#FFFFFF"/></svg></button>
+        <span class="k k1"></span><span class="k k2"></span><span class="k k3"></span><span class="k k4"></span>
+      </div>
+      <div class="promo-cote" aria-hidden="true"><span class="run" id="promoRun"></span><span class="t t0">0:00</span><span class="t t1">0:47</span></div>
+      <ol class="promo-notes">
+        <li class="n1"><span><b>01</b><span class="nd"> — Un passage par mois</span><span class="nm">Un passage<br>par mois</span></span></li>
+        <li class="n2"><span><b>02</b><span class="nd"> — Toujours le même angle</span><span class="nm">Toujours<br>le même angle</span></span></li>
+        <li class="n3"><span><b>03</b><span class="nd"> — Photos et vidéo livrées sous&nbsp;48&nbsp;h</span><span class="nm">Livré<br>sous&nbsp;48&nbsp;h</span></span></li>
+      </ol>
+    </div>
+    <div class="promo-cta"><a class="btn" href="#devis">Demander un devis</a></div>
+  </div>
+</section>
 
 <section aria-labelledby="t-probleme">
   <div class="wrap problem">
@@ -1203,7 +1315,10 @@ html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::a
       }
       return '';
     }
-    addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;if(!calm)drone.style.display='block';
+    addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;
+      /* Pas de drone au-dessus de la section vidéo : curseur normal pour le lecteur */
+      if(e.target.closest&&e.target.closest('.promo')){drone.style.display='none';return;}
+      if(!calm)drone.style.display='block';
       var t=e.target.closest&&e.target.closest('a,button');drone.classList.toggle('hot',!!t);
       var c=encre(e.clientX,e.clientY);if(c)drone.style.setProperty('--dc',c);else drone.style.removeProperty('--dc');});
     document.addEventListener('pointerleave',function(){drone.style.display='none';});
@@ -1651,6 +1766,22 @@ function ycnConfirmer(form){
   if(!YCN_CONFIRMATION)return;
   try{fetch(YCN_CONFIRMATION,{method:'POST',mode:'no-cors',body:new URLSearchParams(new FormData(form))});}catch(e){}
 }
+</script>
+<script>
+/* Vidéo de présentation : bouton lecture rouge (caché pendant la lecture) et ligne de cote qui avance avec le film */
+(function(){
+  var v=document.getElementById('promoVid'),b=document.getElementById('promoPlay'),run=document.getElementById('promoRun');
+  if(!v||!b)return;
+  /* Avant la première lecture : pas de barre de contrôle native, seulement l'image et le bouton rouge */
+  v.controls=false;
+  function lire(){var p=v.play();if(p&&p.catch)p.catch(function(){});}
+  b.addEventListener('click',lire);
+  v.addEventListener('click',function(){if(!v.controls&&v.paused)lire();});
+  v.addEventListener('play',function(){b.hidden=true;v.controls=true;});
+  v.addEventListener('pause',function(){b.hidden=false;});
+  v.addEventListener('ended',function(){b.hidden=false;});
+  v.addEventListener('timeupdate',function(){if(v.duration)run.style.width=(100*v.currentTime/v.duration)+'%';});
+})();
 </script>
 </body>
 </html>
