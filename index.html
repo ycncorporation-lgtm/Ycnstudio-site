@@ -164,13 +164,34 @@ section{padding:104px 0;border-bottom:1px solid var(--line)}
 .promo-notes b{color:var(--red);font-weight:600}
 .promo-cta{text-align:center;margin-top:36px}
 .promo-notes .nm{display:none}
+/* Annotations cliquables : survol, toucher et focus clavier identiques (300 ms, ease-out) */
+.promo-notes .pn{position:relative;display:inline-block;color:inherit;text-decoration:none;outline:none;-webkit-tap-highlight-color:transparent}
+.promo-notes .pn b,.promo-notes .pn .nd,.promo-notes .pn .nm{transition:color .3s ease-out}
+.promo-notes .pn::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:1px;background:var(--red);transform:scaleX(0);transform-origin:left center;transition:transform .3s ease-out}
+.promo-notes .arr{display:inline-block;width:0;overflow:visible;white-space:nowrap;color:var(--red);opacity:0;transform:translateX(-6px);transition:opacity .3s ease-out,transform .3s ease-out}
+.promo-notes .arr::before{content:"";display:inline-block;width:.45em}
+.promo-notes .pn:hover b,.promo-notes .pn:focus-visible b,.promo-notes .pn:active b{color:#FFFFFF}
+.promo-notes .pn:hover .nd,.promo-notes .pn:hover .nm,.promo-notes .pn:focus-visible .nd,.promo-notes .pn:focus-visible .nm,.promo-notes .pn:active .nd,.promo-notes .pn:active .nm{color:var(--red)}
+.promo-notes .pn:hover::after,.promo-notes .pn:focus-visible::after,.promo-notes .pn:active::after{transform:scaleX(1)}
+.promo-notes .pn:hover .arr,.promo-notes .pn:focus-visible .arr,.promo-notes .pn:active .arr{opacity:1;transform:translateX(0)}
+body.calm .promo-notes .pn::after,body.calm .promo-notes .arr,body.calm .promo-notes li::after{transition:none}
+/* Équerres rouges posées un instant autour du formulaire à l'arrivée */
+.qmarks{position:absolute;pointer-events:none;z-index:5;opacity:0;transition:opacity .2s ease-out}
+.qmarks.on{opacity:1}
+.qmarks i{position:absolute;width:16px;height:16px;border:0 solid var(--red)}
+.qmarks i:nth-child(1){top:-9px;left:-9px;border-top-width:1px;border-left-width:1px}
+.qmarks i:nth-child(2){top:-9px;right:-9px;border-top-width:1px;border-right-width:1px}
+.qmarks i:nth-child(3){bottom:-9px;left:-9px;border-bottom-width:1px;border-left-width:1px}
+.qmarks i:nth-child(4){bottom:-9px;right:-9px;border-bottom-width:1px;border-right-width:1px}
+body.calm .qmarks{transition:none}
 /* Ordinateur : annotations de part et d'autre, reliées à la vidéo par une ligne de cote */
 @media (min-width:1101px){
   .promo-notes li{position:absolute;display:flex;align-items:center;gap:14px;width:min(380px,calc((min(100vw,1240px) - 64px - (80vh - 18px) * 9 / 16) / 2 - 12px))}
-  .promo-notes li::after{content:"";flex:1 0 72px;height:9px;border-top:0;background:linear-gradient(#6A6A6A,#6A6A6A) left center/100% 1px no-repeat,linear-gradient(#A8A8A8,#A8A8A8) right center/1px 100% no-repeat}
+  .promo-notes li::after{content:"";flex:1 0 72px;height:9px;color:#6A6A6A;background:linear-gradient(currentColor,currentColor) left center/100% 1px no-repeat;border-right:1px solid #A8A8A8;transition:color .3s ease-out,border-color .3s ease-out}
   .promo-notes .n1,.promo-notes .n3{right:calc(100% + 14px);text-align:right}
   .promo-notes .n2{left:calc(100% + 14px);flex-direction:row-reverse}
-  .promo-notes .n2::after{background-position:left center,left center}
+  .promo-notes .n2::after{border-right:0;border-left:1px solid #A8A8A8}
+  .promo-notes li:hover::after,.promo-notes li:focus-within::after{color:var(--red);border-color:var(--red)}
   .promo-notes .n1{top:24%}
   .promo-notes .n2{top:44%}
   .promo-notes .n3{top:66%}
@@ -577,6 +598,7 @@ body.calm .rec,body.calm .rec-halo{animation:none}
   .xcard::before,.xmore::after{transition:none}
   .hero h1.float span{animation:none}
   .rec,.rec-halo,.logo-sq,.promo-t .caret,.promo-play::before{animation:none}
+  .promo-notes .pn::after,.promo-notes .arr,.promo-notes li::after,.qmarks{transition:none}
   .qdrone,.qflight .rail-done{transition:none}
 }
 /* Interrupteur jour / nuit : carré rouge qui glisse */
@@ -749,9 +771,9 @@ html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::a
       </div>
       <div class="promo-cote" aria-hidden="true"><span class="run" id="promoRun"></span><span class="t t0">0:00</span><span class="t t1">0:47</span></div>
       <ol class="promo-notes">
-        <li class="n1"><span><b>01</b><span class="nd"> — Un passage par mois</span><span class="nm">Un passage<br>par mois</span></span></li>
-        <li class="n2"><span><b>02</b><span class="nd"> — Toujours le même angle</span><span class="nm">Toujours<br>le même angle</span></span></li>
-        <li class="n3"><span><b>03</b><span class="nd"> — Photos et vidéo livrées sous&nbsp;48&nbsp;h</span><span class="nm">Livré<br>sous&nbsp;48&nbsp;h</span></span></li>
+        <li class="n1"><a class="pn" href="#devis" data-n="1"><b>01</b><span class="nd"> — Un passage par mois<span class="arr" aria-hidden="true">→</span></span><span class="nm">Un passage<br>par mois<span class="arr" aria-hidden="true">→</span></span></a></li>
+        <li class="n2"><a class="pn" href="#devis" data-n="2"><b>02</b><span class="nd"> — Toujours le même angle<span class="arr" aria-hidden="true">→</span></span><span class="nm">Toujours<br>le même angle<span class="arr" aria-hidden="true">→</span></span></a></li>
+        <li class="n3"><a class="pn" href="#devis" data-n="3"><b>03</b><span class="nd"> — Photos et vidéo livrées sous&nbsp;48&nbsp;h<span class="arr" aria-hidden="true">→</span></span><span class="nm">Livré<br>sous&nbsp;48&nbsp;h<span class="arr" aria-hidden="true">→</span></span></a></li>
       </ol>
     </div>
     <div class="promo-cta"><a class="btn" href="#devis">Demander un devis</a></div>
@@ -1781,6 +1803,39 @@ function ycnConfirmer(form){
   v.addEventListener('pause',function(){b.hidden=false;});
   v.addEventListener('ended',function(){b.hidden=false;});
   v.addEventListener('timeupdate',function(){if(v.duration)run.style.width=(100*v.currentTime/v.duration)+'%';});
+})();
+/* Annotations 01 / 02 / 03 : défilement doux vers le devis, équerres rouges autour du formulaire, offre « Suivi mensuel » présélectionnée si aucune n'est choisie */
+(function(){
+  var devis=document.getElementById('devis'),form=document.getElementById('quoteForm');
+  if(!devis||!form)return;
+  function calme(){return document.body.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches;}
+  function equerres(){
+    var r=form.getBoundingClientRect(),m=document.createElement('div');
+    m.className='qmarks'; m.setAttribute('aria-hidden','true'); m.innerHTML='<i></i><i></i><i></i><i></i>';
+    /* Le formulaire est souvent plus haut que l'écran : le cadre s'arrête au bas de la partie visible, pour que les 4 équerres se voient */
+    var bas=Math.min(r.bottom,innerHeight-24);
+    m.style.left=(r.left+scrollX)+'px'; m.style.top=(r.top+scrollY)+'px'; m.style.width=r.width+'px'; m.style.height=Math.max(0,bas-r.top)+'px';
+    document.body.appendChild(m);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){m.classList.add('on');});});
+    setTimeout(function(){m.classList.remove('on');},1200);
+    setTimeout(function(){m.remove();},calme()?1250:1500);
+  }
+  [].forEach.call(document.querySelectorAll('.promo-notes .pn'),function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      /* Même effet qu'un clic du visiteur sur « Suivi mensuel », sans passer à l'étape suivante ; rien ne change si une offre est déjà choisie */
+      if(!form.hidden&&!form.querySelector('input[name=offre]:checked')){
+        var r=form.querySelector('input[name=offre][value="Suivi mensuel"]');
+        if(r)r.click();
+      }
+      var fini=false;
+      function arrivee(){if(fini)return;fini=true;removeEventListener('scrollend',arrivee);equerres();}
+      addEventListener('scrollend',arrivee);
+      setTimeout(arrivee,calme()?50:1600);
+      devis.scrollIntoView({block:'start',behavior:calme()?'auto':'smooth'});
+      if(history.replaceState)history.replaceState(null,'','#devis');
+    });
+  });
 })();
 </script>
 </body>
