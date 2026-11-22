@@ -924,10 +924,13 @@ html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::a
 <section id="offres" aria-labelledby="t-offres">
   <div class="wrap">
     <div class="head">
-      <h2 id="t-offres">Trois façons de suivre votre chantier.</h2>
+      <h2 id="t-offres">Quatre façons de suivre votre chantier.</h2>
       <p>Chaque chantier est différent. Le devis est établi après un échange de 10 minutes.</p>
     </div>
-    <div class="cols">
+    <div class="cols four">
+      <div class="col offer"><h3>Vol découverte</h3><p class="when">Un premier passage sur votre chantier</p>
+        <ul><li>Photos HD et vidéo courte</li><li>Pour tester avant de vous engager</li><li>Déduit si vous continuez avec le suivi mensuel</li></ul>
+        <a class="more" href="#devis" data-offre="Vol découverte">Demander un devis</a></div>
       <div class="col offer"><h3>Suivi mensuel</h3><p class="when">Toute la durée du chantier, 3 mois minimum</p>
         <ul><li>1 passage par mois, ou 2 pour les chantiers rapides</li><li>Mêmes angles à chaque passage</li><li>Photos HD et vidéo courte</li><li>Rapport visuel comparatif</li></ul>
         <a class="more" href="#devis" data-offre="Suivi mensuel">Demander un devis</a></div>
@@ -1119,7 +1122,8 @@ html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::a
           <fieldset class="qpanel on">
             <legend><span class="n">1.</span> Quelle offre vous intéresse ?</legend>
             <div class="opts">
-              <label class="opt"><input type="radio" name="offre" value="Suivi mensuel" required><span class="box"><b>Suivi mensuel</b><small>Un passage par mois, mêmes angles, rapport comparatif</small></span></label>
+              <label class="opt"><input type="radio" name="offre" value="Vol découverte" required><span class="box"><b>Vol découverte</b><small>Un premier passage pour tester, déduit si vous continuez</small></span></label>
+              <label class="opt"><input type="radio" name="offre" value="Suivi mensuel"><span class="box"><b>Suivi mensuel</b><small>Un passage par mois, mêmes angles, rapport comparatif</small></span></label>
               <label class="opt"><input type="radio" name="offre" value="Vol ponctuel"><span class="box"><b>Vol ponctuel</b><small>État des lieux ou étape clé, livré sous 48 h</small></span></label>
               <label class="opt"><input type="radio" name="offre" value="Film de livraison"><span class="box"><b>Film de livraison</b><small>Timelapse aérien et film de 1 à 2 minutes</small></span></label>
               <label class="opt"><input type="radio" name="offre" value="Autre besoin"><span class="box"><b>Autre besoin</b><small>Inspection, photogrammétrie, projet particulier</small></span></label>
@@ -1828,14 +1832,21 @@ function ycnConfirmer(form){
         var r=form.querySelector('input[name=offre][value="Suivi mensuel"]');
         if(r)r.click();
       }
-      var fini=false;
-      function arrivee(){if(fini)return;fini=true;removeEventListener('scrollend',arrivee);equerres();}
-      addEventListener('scrollend',arrivee);
-      setTimeout(arrivee,calme()?50:1600);
-      devis.scrollIntoView({block:'start',behavior:calme()?'auto':'smooth'});
-      if(history.replaceState)history.replaceState(null,'','#devis');
+      allerAuDevis();
     });
   });
+  /* Défilement doux vers le devis puis équerres rouges à l'arrivée */
+  function allerAuDevis(){
+    var fini=false;
+    function arrivee(){if(fini)return;fini=true;removeEventListener('scrollend',arrivee);equerres();}
+    addEventListener('scrollend',arrivee);
+    setTimeout(arrivee,calme()?50:1600);
+    devis.scrollIntoView({block:'start',behavior:calme()?'auto':'smooth'});
+    if(history.replaceState)history.replaceState(null,'','#devis');
+  }
+  /* Bouton de l'offre « Vol découverte » : l'offre est cochée par le script du devis (data-offre), ici la même arrivée que 01 / 02 / 03 */
+  var vd=document.querySelector('.offer a[data-offre="Vol découverte"]');
+  if(vd)vd.addEventListener('click',function(e){if(form.hidden)return;e.preventDefault();allerAuDevis();});
 })();
 </script>
 </body>
