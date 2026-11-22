@@ -55,6 +55,8 @@ h1,h2{font-family:var(--display);font-weight:400;text-transform:uppercase;line-h
 p{margin:0}
 
 /* En-tête */
+/* Arrivée par le lien « Confidentialité » : le titre du bloc reste visible sous l'en-tête fixe */
+#confidentialite{scroll-margin-top:96px}
 header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none}
@@ -162,7 +164,7 @@ html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::a
         <p>L’ensemble des contenus du site (textes, photographies, vidéos, prises de vue aériennes, logos et éléments graphiques) est la propriété de YCNSTUDIO, sauf mention contraire. Toute reproduction, représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
       </div>
 
-      <div class="block" id="donnees">
+      <div class="block" id="confidentialite">
         <h2>Données personnelles</h2>
         <p>Le formulaire de demande de devis recueille votre nom, votre société, vos coordonnées et les informations sur votre chantier. Ces données servent uniquement à établir votre devis et à vous recontacter. Elles sont conservées 3 ans après notre dernier échange, puis supprimées, et ne sont jamais cédées à des tiers.</p>
         <p>Les demandes envoyées depuis les formulaires sont transmises par Formspree (Formspree, Inc., États-Unis), qui les envoie par e-mail à YCN Chantier et les conserve dans son espace sécurisé. Un e-mail de confirmation vous est ensuite envoyé depuis l’adresse contact@ycnstudio.com (Google Workspace). Les informations transmises par e-mail ou par téléphone suivent les mêmes règles.</p>
